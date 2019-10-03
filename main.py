@@ -38,8 +38,7 @@ class Servicer(grpc_faceDataServer.FaceDataServerServicer):
         self.clients.append(req.token)
 
         while req.token in self.clients:
-            c = self.dataStore.current
-            yield FaceData(c.x, c.y, c.z)
+            yield self.dataStore.current
 
     def stopStream(self, req, context):
         if req.token in self.clients:
