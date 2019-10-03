@@ -53,7 +53,7 @@ class Servicer(grpc_faceDataServer.FaceDataServerServicer):
 def main(stdscr):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     dataStore = FaceDataStore()
-    grpc_faceDataServer.add_faceDataServerServicer_to_server(
+    grpc_faceDataServer.add_FaceDataServerServicer_to_server(
             Servicer(dataStore), server)
     server.add_insecure_port('[::]:5039')
     server.start()
