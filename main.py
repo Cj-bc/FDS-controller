@@ -5,6 +5,7 @@ import curses
 import grpc
 import time
 import secrets
+import math
 from typing import List
 
 # FaceDataStore {{{
@@ -14,13 +15,13 @@ class FaceDataStore():
     current: FaceData = FaceData(x=0.0, y=0.0, z=0.0)
 
     def addy(self, amount):
-        self.current.y += amount
+        self.current.y += math.radians(amount)
 
     def addx(self, amount):
-        self.current.x += amount
+        self.current.x += math.radians(amount)
 
     def addz(self, amount):
-        self.current.z += amount
+        self.current.z += math.radians(amount)
 # }}}
 
 
