@@ -35,6 +35,8 @@ class Servicer(grpc_faceDataServer.FaceDataServerServicer):
         return Status(success=True, token=Token(token=secrets.token_hex()))
 
     def startStream(self, req, context):
+        self.clients.append(req.token)
+
         while req.token in self.clients:
             c = self.dataStore.current
             yield FaceData(c.x, c.y, c.z)
