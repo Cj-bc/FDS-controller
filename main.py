@@ -1,5 +1,5 @@
 import faceDataServer_pb2_grpc as grpc_faceDataServer
-from faceDataServer_pb2 import FaceData, Token
+from faceDataServer_pb2 import FaceData, Token, Status
 from concurrent import futures
 import curses
 import grpc
