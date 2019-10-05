@@ -57,7 +57,7 @@ def main(stdscr):
     dataStore = FaceDataStore()
     grpc_faceDataServer.add_FaceDataServerServicer_to_server(
             Servicer(dataStore), server)
-    server.add_insecure_port('[::]:5039')
+    server.add_insecure_port('[::]:50052')
     server.start()
     print("----- Server started -----")
     try:
