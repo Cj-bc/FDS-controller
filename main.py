@@ -7,7 +7,10 @@ import grpc
 import time
 import secrets
 import math
-from typing import List
+from typing import List, Tuple
+
+TokenType = str
+Degree = int
 
 # FaceDataStore {{{
 class FaceDataStore():
@@ -28,7 +31,7 @@ class FaceDataStore():
 
 class Servicer(grpc_faceDataServer.FaceDataServerServicer):
     dataStore: FaceDataStore = None
-    clients: List[str] = []
+    clients: List[TokenType] = []
 
     def __init__(self, ds):
         self.dataStore = ds
@@ -71,13 +74,14 @@ def askDirectDegree(stdscr) -> Tuple[str, Degree]:
 
 
 def main(stdscr):
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server: grpc._server._Server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     dataStore = FaceDataStore()
     grpc_faceDataServer.add_FaceDataServerServicer_to_server(
             Servicer(dataStore), server)
     server.add_insecure_port('[::]:50052')
     server.start()
     print("----- Server started -----")
+
     try:
         while True:
             k = stdscr.getkey()
