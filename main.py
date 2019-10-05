@@ -101,6 +101,19 @@ def main(stdscr):
             elif k == 'e':
                 dataStore.addz(1)
                 stdscr.addstr(20, 20, '<\\')
+            elif k == 'x':
+                degree = askDirectDegree(stdscr)
+                dataStore.current.x = math.radians(degree)
+            elif k == 'y':
+                degree = askDirectDegree(stdscr)
+                dataStore.current.y = math.radians(degree)
+            elif k == 'z':
+                degree = askDirectDegree(stdscr)
+                dataStore.current.z = math.radians(degree)
+
+            stdscr.addstr(10, 10, f"x: {math.degrees(dataStore.current.x)}, "
+                                  f"y: {math.degrees(dataStore.current.y)}, "
+                                  f"z: {math.degrees(dataStore.current.z)}")
 
     except KeyboardInterrupt:
         pass
