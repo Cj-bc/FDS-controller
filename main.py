@@ -2,6 +2,7 @@ import faceDataServer_pb2_grpc as grpc_faceDataServer
 from faceDataServer_pb2 import FaceData, Token, Status
 from concurrent import futures
 import curses
+from curses.textpad import Textbox, rectangle
 import grpc
 import time
 import secrets
@@ -49,6 +50,23 @@ class Servicer(grpc_faceDataServer.FaceDataServerServicer):
     def shutdown(self, req, context):
         return Status(success=True)
 
+
+def askDirectDegree(stdscr) -> Tuple[str, Degree]:
+    editwin = curses.newwin(1,15, 20, 1)
+    rectangle(stdscr, 20-1, 1-1, 20+1, 15+1+1)
+    stdscr.refresh()
+    box = Textbox(editwin)
+
+    box.edit()
+
+    gathered = box.gather()
+    try:
+        res = int(gathered)
+    except ValueError:
+        stdscr.addstr(1, 1, "Failed to input")
+        return 0
+
+    return res
 
 
 
