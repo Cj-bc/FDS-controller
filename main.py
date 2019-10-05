@@ -67,16 +67,22 @@ def main(stdscr):
                 break
             elif k == 'a':
                 dataStore.addy(-1)
+                stdscr.addch(20, 20, '<')
             elif k == 'd':
                 dataStore.addy(1)
+                stdscr.addch(20, 20, '>')
             elif k == 'w':
                 dataStore.addx(1)
+                stdscr.addch(20, 20, '^')
             elif k == 's':
                 dataStore.addx(-1)
+                stdscr.addch(20, 20, 'v')
             elif k == 'q':
                 dataStore.addz(-1)
+                stdscr.addstr(20, 20, '/>')
             elif k == 'e':
                 dataStore.addz(1)
+                stdscr.addstr(20, 20, '<\\')
 
     except KeyboardInterrupt:
         pass
