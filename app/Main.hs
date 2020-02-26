@@ -1,3 +1,4 @@
+{-# LANGUAGE Templatehaskell #-}
 module Main where
 
 import qualified Graphics.Vty as Vty
@@ -5,13 +6,18 @@ import Brick
 import Brick.BChan
 import Control.Concurrent (forkIO)
 import Control.Monad (forever)
+import Control.Lens (makeLenses)
 import FaceDataServer.Types (Radian, Percent)
 import Network.Multicast (multicastSender)
 
 data Name = NoName
-type AppState = (Socket, FaceData)
+data AppState = AppState { _sock     :: Socket
+                         , _addr     :: SockAddr
+                         , _faceData :: FaceData
+                         }
+makeLenses ''AppState
 
-mkInitialState sock = (sock, defaultFaceData)
+mkInitialState sock addr = AppState sock addr defaultFaceData
 
 hostName = "226.0.0.1"
 portNum = 5032
@@ -33,5 +39,5 @@ app = App { appDraw         = ui
 
 main :: IO ()
 main = do
-    s <- multicastSender hostName portNum
-    void $ defaultMain app $ mkInitalState s
+    (s, adr) <- multicastSender hostName portNum
+    void $ defaultMain app $ mkInitalState s adr
