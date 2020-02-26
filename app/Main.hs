@@ -9,16 +9,10 @@ import FaceDataServer.Types (Radian, Percent)
 import Network.Multicast (multicastReceiver)
 
 data Name = NoName
-data AppState = AppState { faceX  :: Radian
-                         , faceY  :: Radian
-                         , faceZ  :: Radian
-                         , rEye   :: Percent
-                         , lEye   :: Percent
-                         , mouthW :: Percent
-                         , mouthH :: Percent
-                         }
+type AppState = (Socket, FaceData)
 
 hostName = "224"
+mkInitialState sock = (sock, defaultFaceData)
 
 
 ui s = [vBox [str "Face-Data-Server easy controller"]]
@@ -28,7 +22,7 @@ ui s = [vBox [str "Face-Data-Server easy controller"]]
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = halt s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = undefined
 
-app :: App s e Name
+app :: App AppState e Name
 app = App { appDraw         = ui
           , appHandleEvent  = eHandler
           , appStartEvent   = return
