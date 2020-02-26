@@ -6,13 +6,15 @@ import Brick.BChan
 import Control.Concurrent (forkIO)
 import Control.Monad (forever)
 import FaceDataServer.Types (Radian, Percent)
+import Network.Multicast (multicastSender)
 
 data Name = NoName
 type AppState = (Socket, FaceData)
 
-hostName = "224"
 mkInitialState sock = (sock, defaultFaceData)
 
+hostName = "226.0.0.1"
+portNum = 5032
 
 ui s = [vBox [str "Face-Data-Server easy controller"]]
 
@@ -31,3 +33,5 @@ app = App { appDraw         = ui
 
 main :: IO ()
 main = do
+    s <- multicastSender hostName portNum
+    void $ defaultMain app $ mkInitalState s
