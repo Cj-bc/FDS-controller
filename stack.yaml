@@ -41,7 +41,7 @@ packages:
 #
 extra-deps:
   - git: https://github.com/Cj-bc/FaceDataServer-hs
-    commit: 1d4fa868e5e2ed08e7c0f683656d6f517e7aa38a
+    commit: 7e1fd73adf3b28b97ab88396d60f9b7d78ad7d33
 
 # Override default flag values for local packages and extra-deps
 # flags: {}
