@@ -6,7 +6,6 @@ import Brick.BChan
 import Control.Concurrent (forkIO)
 import Control.Monad (forever)
 import FaceDataServer.Types (Radian, Percent)
-import Network.Multicast (multicastReceiver)
 
 data Name = NoName
 type AppState = (Socket, FaceData)
@@ -32,7 +31,3 @@ app = App { appDraw         = ui
 
 main :: IO ()
 main = do
-    evntChan <- newBChan 10
-    sock <- multicastReceiver 
-    forkIO $ forever $ do
-        writeBChan eventChan 
