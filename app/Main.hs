@@ -48,13 +48,25 @@ update f l s = continue =<< liftIO (do
     return s')
 
 eHandler s (VtyEvent (Vty.EvKey (Vty.KEsc) []))      = halt s
+-- Face Rotation
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'a') [])) = update (subtract $ 1/pi) face_y_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 's') [])) = update (subtract $ 1/pi) face_x_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = update (+ 1/pi)          face_x_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi)          face_y_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract $ 1/pi) face_z_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi)          face_z_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = undefined
+-- Mouth
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'h') [])) = update (subtract 1) mouth_width_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'l') [])) = update (+ 1)        mouth_width_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'j') [])) = update (subtract 1) mouth_height_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'k') [])) = update (+ 1)        mouth_height_percent s
+-- Left Eye
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'o') [])) = update (subtract 1)  left_eye_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'p') [])) = update (+ 1)         left_eye_percent s
+-- Right Eye
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'u') [])) = update (subtract 1)  right_eye_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'i') [])) = update (+ 1)         right_eye_percent s
+
 eHandler s _ = continue s
 -- }}}
 
