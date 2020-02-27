@@ -55,6 +55,7 @@ eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi)          
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract $ 1/pi) face_z_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi)          face_z_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = undefined
+eHandler s _ = continue s
 -- }}}
 
 app :: App AppState e Name
