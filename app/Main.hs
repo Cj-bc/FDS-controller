@@ -1,4 +1,4 @@
-{-# LANGUAGE Templatehaskell #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Main where
 
 import qualified Graphics.Vty as Vty
@@ -52,4 +52,4 @@ app = App { appDraw         = ui
 main :: IO ()
 main = do
     (s, adr) <- multicastSender hostName portNum
-    void $ defaultMain app $ mkInitalState s adr
+    void $ defaultMain app $ mkInitialState s adr
