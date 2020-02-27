@@ -20,11 +20,11 @@ packages:
     git: https://github.com/Cj-bc/FaceDataServer-hs
     pantry-tree:
       size: 605
-      sha256: ead0304f1ed24b1a4d5bb8dd59f8596bfd81b46fe3b8c41e6f130fffd9488623
-    commit: 1d4fa868e5e2ed08e7c0f683656d6f517e7aa38a
+      sha256: 8cedd3ed118675dff5c42cd98fc814a298bb2ac046c87cd4e1b69c6dac5da41c
+    commit: 64125d9b7846783d47c8622720f0a524d0565015
   original:
     git: https://github.com/Cj-bc/FaceDataServer-hs
-    commit: 1d4fa868e5e2ed08e7c0f683656d6f517e7aa38a
+    commit: 64125d9b7846783d47c8622720f0a524d0565015
 snapshots:
 - completed:
     size: 489011
