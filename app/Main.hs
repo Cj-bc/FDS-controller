@@ -29,9 +29,9 @@ portNum = 5032
 
 uiFaceRadians :: FaceData -> Widget Name
 uiFaceRadians s = border $ vBox [ str "Face Rotations"
-                                , hCenter $ str $ "X: " ++ show (s^.face_x_radian)
-                                , hCenter $ str $ "Y: " ++ show (s^.face_y_radian)
-                                , hCenter $ str $ "Z: " ++ show (s^.face_z_radian)
+                                , str $ "X: " ++ show (s^.face_x_radian)
+                                , str $ "Y: " ++ show (s^.face_y_radian)
+                                , str $ "Z: " ++ show (s^.face_z_radian)
                                 ]
 
 uiMouthPercents s = border $ vBox [ str "Mouth size percentage"
