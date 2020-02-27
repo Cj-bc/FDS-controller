@@ -24,7 +24,9 @@ dependencies:
 - vty
 - brick
 - FaceDataServer-hs
+- network
 - network-multicast
+- lens
 
 library:
   source-dirs: src

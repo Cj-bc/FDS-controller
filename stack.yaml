@@ -40,6 +40,7 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 extra-deps:
+  - network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
   - git: https://github.com/Cj-bc/FaceDataServer-hs
     commit: 7e1fd73adf3b28b97ab88396d60f9b7d78ad7d33
 
