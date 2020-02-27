@@ -4,6 +4,8 @@ module Main where
 import qualified Graphics.Vty as Vty
 import Brick
 import Brick.BChan
+import Brick.Widgets.Center (hCenter)
+import Brick.Widgets.Border (border)
 import Control.Concurrent (forkIO)
 import Control.Monad (forever, void)
 import Control.Monad.IO.Class (liftIO)
@@ -25,7 +27,17 @@ mkInitialState sock addr = AppState sock addr defaultFaceData
 hostName = "226.0.0.1"
 portNum = 5032
 
-ui s = [vBox [str "Face-Data-Server easy controller"]]
+uiFaceRadians :: FaceData -> Widget Name
+uiFaceRadians s = border $ vBox [ str "Face Rotations"
+                                , hCenter $ str $ "X: " ++ show (s^.face_x_radian)
+                                , hCenter $ str $ "Y: " ++ show (s^.face_y_radian)
+                                , hCenter $ str $ "Z: " ++ show (s^.face_z_radian)
+                                ]
+
+ui s = [vBox [ str "Face-Data-Server easy controller"
+             , uiFaceRadians (s^.faceData)
+             ]
+       ]
 
 -- Event handler {{{
 
