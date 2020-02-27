@@ -13,7 +13,7 @@ import FaceDataServer.Connection
 import Network.Socket (Socket, SockAddr)
 import Network.Multicast (multicastSender)
 
-data Name = NoName
+data Name = NoName deriving (Eq, Ord)
 data AppState = AppState { _sock     :: Socket
                          , _addr     :: SockAddr
                          , _faceData :: FaceData
