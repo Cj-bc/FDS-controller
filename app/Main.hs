@@ -5,10 +5,12 @@ import qualified Graphics.Vty as Vty
 import Brick
 import Brick.BChan
 import Control.Concurrent (forkIO)
-import Control.Monad (forever)
-import Control.Lens (makeLenses)
-import FaceDataServer.Types (Radian, Percent)
+import Control.Monad (forever, void)
+import Control.Monad.IO.Class (liftIO)
+import Control.Lens
+import FaceDataServer.Types
 import FaceDataServer.Connection
+import Network.Socket (Socket, SockAddr)
 import Network.Multicast (multicastSender)
 
 data Name = NoName
