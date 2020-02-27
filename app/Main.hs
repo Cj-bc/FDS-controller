@@ -25,19 +25,21 @@ portNum = 5032
 
 ui s = [vBox [str "Face-Data-Server easy controller"]]
 
--- Event handler. Temporary code. NO COMMIT {{{
-update f l s = do
-    let s' = over f l s
-    sendFaceData (s^.sock) (s^.addr) s'
-    return s'
+-- Event handler {{{
 
-eHandler s (VtyEvent (Vty.EvKey (Vty.KEsc) [])) = halt s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'a') [])) = update (subtract 1/pi) (faceData&face_y_radian) s >>= continue
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 's') [])) = update (subtract 1/pi) (faceData&face_x_radian) s >>= continue
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = update (+ 1/pi) (faceData&face_x_radian) s >>= continue
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi) (faceData&face_y_radian) s >>= continue
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract 1/pi) (faceData&face_z_radian) s >>= continue
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi) (faceData&face_z_radian) s >>= continue
+-- | [Helper function] Update faceData and send it.
+update f l s = continue =<< liftIO (do
+    let s' = s&(faceData.l)%~f
+    sendFaceData (s^.sock) (s^.addr) (s'^.faceData)
+    return s')
+
+eHandler s (VtyEvent (Vty.EvKey (Vty.KEsc) []))      = halt s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'a') [])) = update (subtract $ 1/pi) face_y_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 's') [])) = update (subtract $ 1/pi) face_x_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = update (+ 1/pi)          face_x_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi)          face_y_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract $ 1/pi) face_z_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi)          face_z_radian s
 eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = undefined
 -- }}}
 
