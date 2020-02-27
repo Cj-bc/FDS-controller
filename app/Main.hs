@@ -34,10 +34,18 @@ uiFaceRadians s = border $ vBox [ str "Face Rotations"
                                 , hCenter $ str $ "Z: " ++ show (s^.face_z_radian)
                                 ]
 
-ui s = [vBox [ str "Face-Data-Server easy controller"
-             , uiFaceRadians (s^.faceData)
+uiMouthPercents s = border $ vBox [ str "Mouth size percentage"
+                                  , str $ "height: " ++ show (s^.mouth_height_percent)
+                                  , str $ "width: "  ++ show (s^.mouth_width_percent)
+                                  ]
+
+ui s = [vBox [ hCenter $ str "Face-Data-Server easy controller"
+             , uiFaceRadians fd
+             , uiMouthPercents fd
              ]
        ]
+    where
+        fd = s^.faceData
 
 -- Event handler {{{
 
