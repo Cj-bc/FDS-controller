@@ -39,9 +39,15 @@ uiMouthPercents s = border $ vBox [ str "Mouth size percentage"
                                   , str $ "width: "  ++ show (s^.mouth_width_percent)
                                   ]
 
+uiEyePercents s = border $ vBox [ str "Eyes size percentage"
+                                , str $ "Left eye: " ++ show (s^.left_eye_percent)
+                                , str $ "Right eye: " ++ show (s^.right_eye_percent)
+                                ]
+
 ui s = [vBox [ hCenter $ str "Face-Data-Server easy controller"
              , uiFaceRadians fd
              , uiMouthPercents fd
+             , uiEyePercents fd
              ]
        ]
     where
