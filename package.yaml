@@ -42,6 +42,14 @@ executables:
     dependencies:
     - FDS-controller
 
+  FDS-simpleFront:
+    main:               Main.hs
+    source-dirs:        app/simpleFront
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
 tests:
   FDS-controller-test:
     main:                Spec.hs
