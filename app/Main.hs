@@ -56,30 +56,32 @@ ui s = [vBox [ hCenter $ str "Face-Data-Server easy controller"
 -- Event handler {{{
 
 -- | [Helper function] Update faceData and send it.
-update f l s = continue =<< liftIO (do
-    let s' = s&(faceData.l)%~f
-    sendFaceData (s^.sock) (s^.addr) (s'^.faceData)
-    return s')
+update f l s r | (s^.faceData^.l) `isRangeOf` r = continue =<< liftIO (do
+                                                let s' = s&(faceData.l)%~f
+                                                sendFaceData (s'^.sock) (s'^.addr) (s'^.faceData)
+                                                return s')
+               | otherwise = continue s
+a `isRangeOf` (b, c) = b <= a && a <= c
 
 eHandler s (VtyEvent (Vty.EvKey (Vty.KEsc) []))      = halt s
 -- Face Rotation
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'a') [])) = update (subtract $ 1/pi) face_y_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 's') [])) = update (subtract $ 1/pi) face_x_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = update (+ 1/pi)          face_x_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi)          face_y_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract $ 1/pi) face_z_radian s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi)          face_z_radian s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'a') [])) = update (subtract $ 1/pi) face_y_radian s (-1/pi, 1/pi)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 's') [])) = update (subtract $ 1/pi) face_x_radian s (-1/pi, 1/pi)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'w') [])) = update (+ 1/pi)          face_x_radian s (-1/pi, 1/pi)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'd') [])) = update (+ 1/pi)          face_y_radian s (-1/pi, 1/pi)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'q') [])) = update (subtract $ 1/pi) face_z_radian s (-1/pi, 1/pi)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'e') [])) = update (+ 1/pi)          face_z_radian s (-1/pi, 1/pi)
 -- Mouth
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'h') [])) = update (subtract 1) mouth_width_percent s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'l') [])) = update (+ 1)        mouth_width_percent s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'j') [])) = update (subtract 1) mouth_height_percent s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'k') [])) = update (+ 1)        mouth_height_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'h') [])) = update (subtract 1) mouth_width_percent s (0, 150)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'l') [])) = update (+ 1)        mouth_width_percent s (0, 150)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'j') [])) = update (subtract 1) mouth_height_percent s (0, 150)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'k') [])) = update (+ 1)        mouth_height_percent s (0, 150)
 -- Left Eye
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'o') [])) = update (subtract 1)  left_eye_percent s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'p') [])) = update (+ 1)         left_eye_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'o') [])) = update (subtract 1)  left_eye_percent s (0, 150)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'p') [])) = update (+ 1)         left_eye_percent s (0, 150)
 -- Right Eye
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'u') [])) = update (subtract 1)  right_eye_percent s
-eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'i') [])) = update (+ 1)         right_eye_percent s
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'u') [])) = update (subtract 1)  right_eye_percent s (0, 150)
+eHandler s (VtyEvent (Vty.EvKey (Vty.KChar 'i') [])) = update (+ 1)         right_eye_percent s (0, 150)
 
 eHandler s _ = continue s
 -- }}}
