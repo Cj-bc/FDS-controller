@@ -24,7 +24,7 @@ makeLenses ''AppState
 
 mkInitialState sock addr = AppState sock addr defaultFaceData
 
-hostName = "226.0.0.1"
+multicastGroupAddr = "226.0.0.1"
 portNum = 5032
 
 uiFaceRadians :: FaceData -> Widget Name
@@ -88,5 +88,5 @@ app = App { appDraw         = ui
 
 main :: IO ()
 main = do
-    (s, adr) <- multicastSender hostName portNum
+    (s, adr) <- multicastSender multicastGroupAddr portNum
     void $ defaultMain app $ mkInitialState s adr
