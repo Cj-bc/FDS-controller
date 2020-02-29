@@ -1,4 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE RankNTypes #-}
 module Main where
 
 import qualified Graphics.Vty as Vty
@@ -56,6 +57,7 @@ ui s = [vBox [ hCenter $ str "Face-Data-Server easy controller"
 -- Event handler {{{
 
 -- | [Helper function] Update faceData and send it.
+update :: Ord a => (a -> a) -> Lens' FaceData a -> AppState -> (a, a) -> EventM Name (Next AppState)
 update f l s r | (s^.faceData^.l) `isRangeOf` r = continue =<< liftIO (do
                                                 let s' = s&(faceData.l)%~f
                                                 sendFaceData (s'^.sock) (s'^.addr) (s'^.faceData)
