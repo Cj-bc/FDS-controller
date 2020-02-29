@@ -58,11 +58,14 @@ ui s = [vBox [ hCenter $ str "Face-Data-Server easy controller"
 
 -- | [Helper function] Update faceData and send it.
 update :: Ord a => (a -> a) -> Lens' FaceData a -> AppState -> (a, a) -> EventM Name (Next AppState)
-update f l s r | (s^.faceData^.l) `isRangeOf` r = continue =<< liftIO (do
-                                                let s' = s&(faceData.l)%~f
-                                                sendFaceData (s'^.sock) (s'^.addr) (s'^.faceData)
-                                                return s')
-               | otherwise = continue s
+update f l s r  = continue =<< liftIO (do
+                                    let updatedV = f (s^.faceData^.l)
+                                        s'       = if updatedV `isRangeOf` r
+                                                   then s&(faceData.l).~updatedV
+                                                   else s
+                                    sendFaceData (s'^.sock) (s'^.addr) (s'^.faceData)
+                                    return s')
+
 a `isRangeOf` (b, c) = b <= a && a <= c
 
 eHandler s (VtyEvent (Vty.EvKey (Vty.KEsc) []))      = halt s
