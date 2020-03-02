@@ -12,19 +12,19 @@ packages:
   original:
     hackage: network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
 - completed:
+    size: 4737
+    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/cd41e778a3a89b398c753a2fa57f947863b3f5b1.tar.gz
     cabal-file:
       size: 1120
       sha256: c598513cff2e3c68e0b572911ccd9283ef40affec25e34b0c7e0bb0224cf0e13
     name: FaceDataServer-hs
     version: 0.1.0.0
-    git: https://github.com/Cj-bc/FaceDataServer-hs
+    sha256: f81178280d95ceeb11f177b3cc8d964695e29eaec9e257e0ad5338defd80655a
     pantry-tree:
       size: 605
-      sha256: 8cedd3ed118675dff5c42cd98fc814a298bb2ac046c87cd4e1b69c6dac5da41c
-    commit: 64125d9b7846783d47c8622720f0a524d0565015
+      sha256: ea2ad38a271c24558e6aee55ab5d8bef9612db77284ff471b18f9c36b7f39000
   original:
-    git: https://github.com/Cj-bc/FaceDataServer-hs
-    commit: 64125d9b7846783d47c8622720f0a524d0565015
+    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/cd41e778a3a89b398c753a2fa57f947863b3f5b1.tar.gz
 snapshots:
 - completed:
     size: 489011
