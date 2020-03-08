@@ -42,7 +42,8 @@ packages:
 extra-deps:
   - network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
   - github: Cj-bc/FaceDataServer-hs
-    commit: cd41e778a3a89b398c753a2fa57f947863b3f5b1
+    commit: 05784a97972459d6900505cd62368305ba636237
+
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

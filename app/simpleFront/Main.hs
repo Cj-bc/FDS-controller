@@ -10,14 +10,13 @@ import Control.Concurrent (forkIO)
 import Control.Monad (forever, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Lens
+import qualified FaceDataServer as FDS
 import FaceDataServer.Types
 import FaceDataServer.Connection
 import Network.Socket (Socket, SockAddr)
 import Network.Multicast (multicastReceiver)
 
 
-multicastGroupAddr = "226.0.0.1"
-portNum = 5032
 
 data CustomEvent = GetData FaceData
 data Name = NoName deriving (Eq, Ord)
@@ -63,7 +62,7 @@ app = App { appDraw         = ui
 
 
 main = do
-    s <- multicastReceiver multicastGroupAddr portNum
+    s <- multicastReceiver FDS.defaultGroupAddr FDS.defaultPortNumber
 
     -- Create thread to receive FaceData
     -- & convert into Event

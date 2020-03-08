@@ -11,6 +11,7 @@ import Control.Concurrent (forkIO)
 import Control.Monad (forever, void)
 import Control.Monad.IO.Class (liftIO)
 import Control.Lens
+import qualified FaceDataServer as FDS
 import FaceDataServer.Types
 import FaceDataServer.Connection
 import Network.Socket (Socket, SockAddr)
@@ -101,5 +102,5 @@ app = App { appDraw         = ui
 
 main :: IO ()
 main = do
-    (s, adr) <- multicastSender multicastGroupAddr portNum
+    (s, adr) <- multicastSender FDS.defaultGroupAddr FDS.defaultPortNumber
     void $ defaultMain app $ mkInitialState s adr
