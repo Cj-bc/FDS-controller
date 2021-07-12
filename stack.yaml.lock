@@ -3,31 +3,28 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    hackage: network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
-    pantry-tree:
-      size: 393
-      sha256: 3a7b55c4427288622cb2b21a14dd5b4da2a7b3bcad50384db9b0435a0aaacc65
-  original:
-    hackage: network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
-- completed:
-    size: 4788
-    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/05784a97972459d6900505cd62368305ba636237.tar.gz
-    cabal-file:
-      size: 1120
-      sha256: c598513cff2e3c68e0b572911ccd9283ef40affec25e34b0c7e0bb0224cf0e13
-    name: FaceDataServer-hs
-    version: 0.1.0.0
-    sha256: 79e228e23f4203c603990151a71e4a8da646e252cff81ec6930b8bed3ab367e1
-    pantry-tree:
-      size: 605
-      sha256: c86c10a5dd7d0224e060a8e5f6f0f8c7bff2302645f09635c42fd3bde571c089
-  original:
-    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/05784a97972459d6900505cd62368305ba636237.tar.gz
 snapshots:
-- completed:
-    size: 489011
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/15/1.yaml
-    sha256: d4ecc42b7125d68e4c3c036a08046ad0cd02ae0d9efbe3af2223a00ff8cc16f3
-  original: lts-15.1
+- original: lts-18.0
+  completed:
+    sha256: c632012da648385b9fa3c29f4e0afd56ead299f1c5528ee789058be410e883c0
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/0.yaml
+    size: 585393
+packages:
+- original:
+    hackage: network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
+  completed:
+    pantry-tree:
+      sha256: 3a7b55c4427288622cb2b21a14dd5b4da2a7b3bcad50384db9b0435a0aaacc65
+      size: 393
+    hackage: network-multicast-0.3.2@sha256:521547635a6afae408ec25193b3e429082dc0442668dac7ad5cea76ccee39750,979
+- original:
+    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/05784a97972459d6900505cd62368305ba636237.tar.gz
+  completed:
+    pantry-tree:
+      sha256: c86c10a5dd7d0224e060a8e5f6f0f8c7bff2302645f09635c42fd3bde571c089
+      size: 605
+    version: 0.1.0.0
+    name: FaceDataServer-hs
+    sha256: 79e228e23f4203c603990151a71e4a8da646e252cff81ec6930b8bed3ab367e1
+    url: https://github.com/Cj-bc/FaceDataServer-hs/archive/05784a97972459d6900505cd62368305ba636237.tar.gz
+    size: 4788
